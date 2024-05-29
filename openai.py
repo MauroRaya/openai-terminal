@@ -17,36 +17,36 @@ def abrir_chatgpt(tipo_operacao, mensagem_operacao):
     prompt = ''
 
     if tipo_operacao == 'err':
-        prompt = 'Me forneça 3 alternativas, assim como suas aplicações codificadas, para solucionar o seguinte erro do código: '
-        prompt += mensagem_operacao + '.\n\n'
+        prompt = 'Corrija o seguinte erro do código, forneçendo 3 possiveis alternativas de soluções: '
 
     elif tipo_operacao == 'leg':
-        prompt = 'Me forneça possíveis mudanças que melhorariam a legibilidade e qualidade do código, evitando ao máximo modularização desnecessária.\n\n'
+        prompt = 'Melhore a legibilidade e qualidade do código: '
 
     elif tipo_operacao == 'alt':
-        prompt = 'Desejo alterar o código abaixo. Me forneça 3 alternativas, assim como suas aplicações codificadas, para codificar a seguinte ideia: '
-        prompt += mensagem_operacao + '.\n\n'
+        prompt = 'Modifique o código para realizar a seguinte ideia: '
+
+    elif tipo_operacao == 'exp':
+        prompt = 'Reescreva o código abaixo, escrevendo uma documentação explicando cada linha como se estivesse ensinando a uma criança de 5 anos: '
+
 
     elif tipo_operacao == 'out':
-        prompt = mensagem_operacao + '.\n\n'
+        prompt = 'Saia do programa: '
 
     if prompt:
-        text_area.send_keys(prompt)
-        # Pasting code from clipboard
+        text_area.send_keys(prompt + mensagem_operacao)
         pyautogui.hotkey('ctrl', 'v')
         pyautogui.press('enter')
 
 
 def copiar_codigo_vscode():
-    # Focando na janela do Visual Studio
-    pyautogui.click(500, 250)  # Ajuste as coordenadas conforme necessário
+    pyautogui.click(500, 250)  
     pyautogui.hotkey('ctrl', 'a')
     pyautogui.hotkey('ctrl', 'c')
 
 
 def main():
     parser = argparse.ArgumentParser(description='CLI para interagir com ChatGPT e Visual Studio Code.')
-    parser.add_argument('tipo_operacao', choices=['err', 'leg', 'alt', 'out'], help='Tipo de operação a ser realizada.')
+    parser.add_argument('tipo_operacao', choices=['err', 'leg', 'alt', 'exp', 'out'], help='Tipo de operação a ser realizada.')
     parser.add_argument('mensagem_operacao', nargs='*', help='Mensagem descrevendo a operação.')
     args = parser.parse_args()
 
