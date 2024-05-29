@@ -28,10 +28,6 @@ def abrir_chatgpt(tipo_operacao, mensagem_operacao):
     elif tipo_operacao == 'exp':
         prompt = 'Reescreva o código abaixo, escrevendo uma documentação explicando cada linha como se estivesse ensinando a uma criança de 5 anos: '
 
-
-    elif tipo_operacao == 'out':
-        prompt = 'Saia do programa: '
-
     if prompt:
         text_area.send_keys(prompt + mensagem_operacao)
         pyautogui.hotkey('ctrl', 'v')
@@ -46,7 +42,7 @@ def copiar_codigo_vscode():
 
 def main():
     parser = argparse.ArgumentParser(description='CLI para interagir com ChatGPT e Visual Studio Code.')
-    parser.add_argument('tipo_operacao', choices=['err', 'leg', 'alt', 'exp', 'out'], help='Tipo de operação a ser realizada.')
+    parser.add_argument('tipo_operacao', choices=['err', 'leg', 'alt', 'exp'], help='Tipo de operação a ser realizada.')
     parser.add_argument('mensagem_operacao', nargs='*', help='Mensagem descrevendo a operação.')
     args = parser.parse_args()
 
